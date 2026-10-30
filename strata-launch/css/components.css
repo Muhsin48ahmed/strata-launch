@@ -1,0 +1,155 @@
+/* Components added on top of the base layout: nav details, button icon, hero stats,
+   flavor meters, chapter progress, ticker band and footer. */
+
+/* Studio sweep: a light pool that follows the can, and a soft lens vignette at the edges */
+.studio {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 38vmax 44vmax at var(--spot-x, 72%) var(--spot-y, 52%),
+      rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.12) 45%, transparent 72%),
+    radial-gradient(ellipse 125% 95% at 50% 45%, transparent 58%,
+      color-mix(in srgb, var(--deep) 18%, transparent) 100%);
+}
+
+/* Floating frosted pill for the section links */
+@media (min-width: 820px) {
+  .nav__links {
+    padding: 0.7rem 1.4rem; border-radius: 999px;
+    background: color-mix(in srgb, var(--paper) 55%, transparent);
+    -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%);
+    border: 1px solid rgba(22, 21, 15, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+}
+
+/* Soft fade behind the nav so copy scrolling underneath stays legible */
+.nav::before {
+  content: ""; position: absolute; inset: 0 0 -1.5rem; z-index: -1; pointer-events: none;
+  background: linear-gradient(var(--bg) 35%, transparent);
+}
+.nav__logo sup, .footer__logo sup { font-size: 0.45em; font-weight: 500; vertical-align: super; margin-left: 0.1em; }
+.nav__links a { position: relative; }
+.nav__links a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 1.5px;
+  background: var(--ink); transform: scaleX(0); transform-origin: 0 50%;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav__links a[aria-current="true"] { opacity: 1; }
+.nav__links a[aria-current="true"]::after { transform: scaleX(1); }
+.nav__links a:hover { text-decoration: none; }
+
+.btn__icon {
+  width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.6;
+  stroke-linecap: round; stroke-linejoin: round;
+  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn:hover .btn__icon { transform: translateX(4px); }
+
+/* Hero stats */
+.stats {
+  margin: 0.6rem 0 0; display: grid; grid-template-columns: repeat(3, auto); justify-content: start;
+  border-top: 1px solid var(--line);
+}
+.stats div { padding: 0.85rem 1.75rem 0 0; display: grid; gap: 0.15rem; }
+.stats div + div { padding-left: 1.75rem; border-left: 1px solid var(--line); }
+.stats dt { font-family: var(--f-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-soft); }
+.stats dd {
+  margin: 0; font-family: var(--f-display); font-weight: 800; font-stretch: 80%;
+  font-size: 2rem; line-height: 1; font-variant-numeric: tabular-nums;
+}
+.stats small { margin-left: 0.2em; font-family: var(--f-mono); font-size: 0.75rem; font-weight: 500; }
+
+/* Flavor taste meters: five segments, filled to --v */
+.meters {
+  grid-column: 2; margin: 0.55rem 0 0.2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem;
+  max-width: 19rem;
+}
+.flavor-list li:not(.is-active) .meters { display: none; }
+.meters div { display: grid; gap: 0.3rem; }
+.meters dt { font-family: var(--f-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; }
+.meters dd {
+  margin: 0; height: 6px;
+  background: linear-gradient(90deg, var(--ink) calc(var(--v) * 20%), var(--line) 0);
+  -webkit-mask: repeating-linear-gradient(90deg, #000 0 calc(20% - 3px), transparent 0 20%);
+  mask: repeating-linear-gradient(90deg, #000 0 calc(20% - 3px), transparent 0 20%);
+}
+.meters dd span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+/* Chapter progress, bottom right */
+.progress {
+  position: fixed; z-index: 20;
+  right: max(var(--gutter-r), env(safe-area-inset-right, 0px));
+  bottom: calc(1.6rem + env(safe-area-inset-bottom, 0px));
+  display: flex; align-items: center; gap: 0.75rem;
+  font-family: var(--f-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
+}
+.progress { transition: opacity 300ms ease; }
+.progress.is-hidden { opacity: 0; }
+.progress__bar { position: relative; width: 6rem; height: 1.5px; background: var(--line); overflow: hidden; }
+.progress__bar span { position: absolute; inset: 0; background: var(--ink); transform: scaleX(0); transform-origin: 0 50%; }
+.progress__name { min-width: 6.5rem; }
+
+/* Ticker band between nutrition and the drop */
+.ticker {
+  position: relative; z-index: 2; overflow: hidden;
+  margin-block: 4rem 0; transform: rotate(-2deg) scale(1.04);
+  background: var(--ink); color: var(--paper);
+  padding-block: 1rem;
+}
+.ticker__track {
+  display: flex; width: max-content; align-items: center; gap: 2rem;
+  animation: ticker 38s linear infinite;
+  font-family: var(--f-display); font-weight: 850; font-stretch: 120%;
+  font-size: clamp(1.5rem, 3.2vw, 2.75rem); line-height: 1; text-transform: uppercase; white-space: nowrap;
+}
+.ticker__track i { font-style: normal; font-size: 0.6em; opacity: 0.6; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+/* Footer */
+.footer {
+  position: relative; z-index: 2; overflow: hidden;
+  padding-top: 4rem;
+  padding-left: var(--gutter-l); padding-right: var(--gutter-r);
+  background: var(--ink); color: var(--paper);
+}
+.footer__grid {
+  display: grid; grid-template-columns: 1.2fr 1fr 1.4fr; gap: 2rem;
+  padding-bottom: 3rem; border-bottom: 1px solid rgba(251, 250, 243, 0.18);
+}
+.footer__grid > * { min-width: 0; margin: 0; }
+.footer__brand { display: grid; gap: 0.5rem; align-content: start; }
+.footer__brand p { margin: 0; color: rgba(251, 250, 243, 0.7); max-width: 28ch; }
+.footer__brand .footer__logo {
+  font-family: var(--f-display); font-weight: 850; font-stretch: 125%; font-size: 1.4rem;
+  letter-spacing: 0.04em; color: var(--paper);
+}
+.footer__links { display: grid; gap: 0.5rem; align-content: start; }
+.footer__links a {
+  font-family: var(--f-mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;
+  text-decoration: none; opacity: 0.8;
+}
+.footer__links a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+.footer__note { font-family: var(--f-mono); font-size: 0.75rem; line-height: 1.6; color: rgba(251, 250, 243, 0.6); max-width: 46ch; }
+.footer__word {
+  margin: 0; padding-bottom: env(safe-area-inset-bottom, 0px);
+  font-family: var(--f-display); font-weight: 900; font-stretch: 150%;
+  font-size: 18.5vw; line-height: 0.74; letter-spacing: -0.02em; text-align: center;
+  color: var(--bg); transform: translateY(14%);
+  white-space: nowrap;
+}
+
+@media (max-width: 819px) {
+  .stats, .progress { display: none; }
+  .meters { gap: 0.5rem; }
+  .flavor-list li:not(.is-active) .meters, .meters { display: none; }
+  .ticker { margin-block: 2rem 0; }
+  .footer__grid { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track { animation: none; }
+}

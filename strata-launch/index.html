@@ -1,0 +1,240 @@
+<title>STRATA Energy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="STRATA is a sparkling energy drink built in four layers. Launching 14 November 2026.">
+<script>
+  // Hide hero copy until the intro plays; reveal anyway if the scene never reports ready.
+  document.documentElement.classList.add('js-intro');
+  window.setTimeout(() => document.documentElement.classList.add('is-ready'), 4000);
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,300..900&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/intro.css">
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    }
+  }
+</script>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__inner">
+    <div class="loader__bars"><span></span><span></span><span></span><span></span></div>
+    <p class="loader__word">STRATA</p>
+    <p class="loader__meta"><span id="loader-count">000</span><span>Pouring four layers</span></p>
+  </div>
+</div>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="nav__logo" href="#top" aria-label="STRATA, back to top">STRATA<sup>&reg;</sup></a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="#layers" data-chapter-link="1">Layers</a>
+    <a href="#flavors" data-chapter-link="2">Flavors</a>
+    <a href="#nutrition" data-chapter-link="3">Nutrition</a>
+  </nav>
+  <a class="btn btn--small" href="#drop">Join the drop</a>
+</header>
+
+<div class="studio" id="studio" aria-hidden="true"></div>
+<div class="backdrop" aria-hidden="true">
+  <span class="backdrop__word" id="backdrop-word">STRATA</span>
+</div>
+
+<canvas class="stage" id="stage" aria-hidden="true"></canvas>
+<div class="stage-fallback" aria-hidden="true"><span></span></div>
+<div class="chips" id="chips" aria-hidden="true"></div>
+
+<div class="progress" aria-hidden="true">
+  <span class="progress__num" id="chapter-num">01</span>
+  <span class="progress__bar"><span id="progress-fill"></span></span>
+  <span class="progress__name" id="chapter-name">Intro</span>
+</div>
+
+<main id="main">
+  <section class="scene" id="top" data-scene data-chapter="Intro" style="--h: 100">
+    <div class="scene__sticky">
+      <div class="panel panel--hero">
+        <p class="eyebrow" data-reveal style="--d: 0">Sparkling energy &middot; Drops 14.11.2026</p>
+        <h1 class="display">
+          <span class="line"><span style="--d: 1">Energy, in</span></span>
+          <span class="line"><span style="--d: 2">four layers.</span></span>
+        </h1>
+        <p class="lede" data-reveal style="--d: 3">STRATA is built like a core sample: electrolytes, clean caffeine, botanicals and a zero-sugar finish, stacked in one 355&nbsp;ml can.</p>
+        <div class="actions" data-reveal style="--d: 4">
+          <a class="btn" href="#drop">Join the drop
+            <svg class="btn__icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h10M8.5 4l4 4-4 4"/></svg>
+          </a>
+          <a class="btn btn--ghost" href="#layers">See the layers</a>
+        </div>
+        <dl class="stats" data-reveal style="--d: 5">
+          <div><dt>Caffeine</dt><dd>120<small>mg</small></dd></div>
+          <div><dt>Sugar</dt><dd>0<small>g</small></dd></div>
+          <div><dt>Energy</dt><dd>15<small>kcal</small></dd></div>
+        </dl>
+      </div>
+      <p class="scroll-hint" data-reveal style="--d: 6"><span></span>Scroll to open the can</p>
+    </div>
+  </section>
+
+  <section class="scene" id="layers" data-scene data-chapter="Layers" style="--h: 320">
+    <div class="scene__sticky">
+      <div class="panel panel--layers">
+        <p class="eyebrow">Core sample</p>
+        <h2 class="display display--md">Open it up.</h2>
+        <p class="lede">Every can is formulated in four strata. Each one does one job, at a dose printed on the side.</p>
+        <ol class="strata-list" id="strata-list">
+          <li data-num="01" data-dose="Na 110 mg · K 90 mg · Mg 40 mg">
+            <span class="strata-list__num">01</span>
+            <span class="strata-list__name">Electrolytes</span>
+            <span class="strata-list__dose">Sodium 110&nbsp;mg, potassium 90&nbsp;mg, magnesium 40&nbsp;mg</span>
+          </li>
+          <li data-num="02" data-dose="120 mg caffeine · 200 mg L-theanine">
+            <span class="strata-list__num">02</span>
+            <span class="strata-list__name">Caffeine</span>
+            <span class="strata-list__dose">120&nbsp;mg from green tea and guayusa, paired with 200&nbsp;mg L-theanine</span>
+          </li>
+          <li data-num="03" data-dose="Rhodiola 150 mg · Lion’s mane 250 mg">
+            <span class="strata-list__num">03</span>
+            <span class="strata-list__name">Botanicals</span>
+            <span class="strata-list__dose">Rhodiola rosea 150&nbsp;mg, lion&rsquo;s mane 250&nbsp;mg</span>
+          </li>
+          <li data-num="04" data-dose="0 g sugar · 15 kcal · allulose + monk fruit">
+            <span class="strata-list__num">04</span>
+            <span class="strata-list__name">Finish</span>
+            <span class="strata-list__dose">0&nbsp;g sugar, 15&nbsp;kcal, sweetened with allulose and monk fruit</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="flavors" data-scene data-chapter="Flavors" style="--h: 420">
+    <div class="scene__sticky">
+      <div class="panel panel--flavors">
+        <p class="eyebrow">Four flavors, one formula</p>
+        <h2 class="display display--md">Pick your rock.</h2>
+        <ul class="flavor-list" id="flavor-list">
+          <li class="is-active" style="--sw: #a8c21a">
+            <span class="flavor-list__swatch"></span>
+            <span class="flavor-list__name">Yuzu Quartz</span>
+            <span class="flavor-list__notes">Yuzu, lime zest, white pepper</span>
+            <dl class="meters">
+              <div><dt>Sweet</dt><dd style="--v: 2"><span>2 of 5</span></dd></div>
+              <div><dt>Tart</dt><dd style="--v: 4"><span>4 of 5</span></dd></div>
+              <div><dt>Fizz</dt><dd style="--v: 5"><span>5 of 5</span></dd></div>
+            </dl>
+          </li>
+          <li style="--sw: #de6a1c">
+            <span class="flavor-list__swatch"></span>
+            <span class="flavor-list__name">Ochre Mango</span>
+            <span class="flavor-list__notes">Alphonso mango, blood orange, chili</span>
+            <dl class="meters">
+              <div><dt>Sweet</dt><dd style="--v: 4"><span>4 of 5</span></dd></div>
+              <div><dt>Tart</dt><dd style="--v: 2"><span>2 of 5</span></dd></div>
+              <div><dt>Fizz</dt><dd style="--v: 3"><span>3 of 5</span></dd></div>
+            </dl>
+          </li>
+          <li style="--sw: #4a2a7a">
+            <span class="flavor-list__swatch"></span>
+            <span class="flavor-list__name">Basalt Cassis</span>
+            <span class="flavor-list__notes">Blackcurrant, sloe, dark cherry</span>
+            <dl class="meters">
+              <div><dt>Sweet</dt><dd style="--v: 3"><span>3 of 5</span></dd></div>
+              <div><dt>Tart</dt><dd style="--v: 3"><span>3 of 5</span></dd></div>
+              <div><dt>Fizz</dt><dd style="--v: 4"><span>4 of 5</span></dd></div>
+            </dl>
+          </li>
+          <li style="--sw: #1c8a81">
+            <span class="flavor-list__swatch"></span>
+            <span class="flavor-list__name">Glacier Mint</span>
+            <span class="flavor-list__notes">Spearmint, cucumber, sea salt</span>
+            <dl class="meters">
+              <div><dt>Sweet</dt><dd style="--v: 1"><span>1 of 5</span></dd></div>
+              <div><dt>Tart</dt><dd style="--v: 2"><span>2 of 5</span></dd></div>
+              <div><dt>Fizz</dt><dd style="--v: 5"><span>5 of 5</span></dd></div>
+            </dl>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene scene--flow scene--right" id="nutrition" data-scene data-chapter="Nutrition">
+    <div class="facts">
+      <p class="eyebrow">Read the side of the can</p>
+      <h2 class="display display--md">Nothing hidden between the layers.</h2>
+      <table class="facts__table">
+        <caption>Nutrition per 355&nbsp;ml can</caption>
+        <tbody>
+          <tr><th scope="row">Energy</th><td>15&nbsp;kcal / 63&nbsp;kJ</td></tr>
+          <tr><th scope="row">Sugars</th><td>0&nbsp;g</td></tr>
+          <tr><th scope="row">Caffeine</th><td>120&nbsp;mg</td></tr>
+          <tr><th scope="row">L-theanine</th><td>200&nbsp;mg</td></tr>
+          <tr><th scope="row">Sodium</th><td>110&nbsp;mg</td></tr>
+          <tr><th scope="row">Potassium</th><td>90&nbsp;mg</td></tr>
+          <tr><th scope="row">Magnesium</th><td>40&nbsp;mg</td></tr>
+          <tr><th scope="row">Carbonation</th><td>3.2&nbsp;vol CO<sub>2</sub></td></tr>
+        </tbody>
+      </table>
+      <p class="facts__warning">High caffeine content (338&nbsp;mg/l). Not recommended for children or pregnant or breast-feeding women.</p>
+      <p class="facts__note">Can: 100% recyclable aluminium, 13.6&nbsp;g, BPA-NI lining.</p>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <span>Yuzu Quartz</span><i>&#10038;</i><span>Ochre Mango</span><i>&#10038;</i><span>Basalt Cassis</span><i>&#10038;</i><span>Glacier Mint</span><i>&#10038;</i><span>120 mg caffeine</span><i>&#10038;</i><span>0 g sugar</span><i>&#10038;</i>
+      <span>Yuzu Quartz</span><i>&#10038;</i><span>Ochre Mango</span><i>&#10038;</i><span>Basalt Cassis</span><i>&#10038;</i><span>Glacier Mint</span><i>&#10038;</i><span>120 mg caffeine</span><i>&#10038;</i><span>0 g sugar</span><i>&#10038;</i>
+    </div>
+  </div>
+
+  <section class="scene scene--flow" id="drop" data-scene data-chapter="The drop">
+    <div class="panel panel--drop">
+      <p class="eyebrow">First run &middot; 40,000 cans</p>
+      <h2 class="display display--md">Drops 14 November.</h2>
+      <div class="countdown" id="countdown" aria-live="polite">
+        <div><span data-unit="days">15</span><small>days</small></div>
+        <div><span data-unit="hours">00</span><small>hours</small></div>
+        <div><span data-unit="minutes">00</span><small>minutes</small></div>
+      </div>
+      <p class="lede">Mixed case of 12, three of each flavor, &euro;34 with free delivery in the EU. List members get the first hour.</p>
+      <form class="waitlist" id="waitlist" novalidate>
+        <label for="waitlist-email">Email for launch-day access</label>
+        <div class="waitlist__row">
+          <input id="waitlist-email" name="email" type="email" autocomplete="email" placeholder="you@studio.com" required>
+          <button class="btn" type="submit">Join the drop
+            <svg class="btn__icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8h10M8.5 4l4 4-4 4"/></svg>
+          </button>
+        </div>
+        <p class="waitlist__status" id="waitlist-status" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer__grid">
+    <div class="footer__brand">
+      <p class="footer__logo">STRATA<sup>&reg;</sup></p>
+      <p>Sparkling energy in four layers. First run 14.11.2026.</p>
+    </div>
+    <nav class="footer__links" aria-label="Footer">
+      <a href="#layers">Layers</a>
+      <a href="#flavors">Flavors</a>
+      <a href="#nutrition">Nutrition</a>
+      <a href="#drop">Join the drop</a>
+    </nav>
+    <p class="footer__note">STRATA is a concept brand designed for a portfolio piece. It is not a real product and nothing is for sale.</p>
+  </div>
+  <p class="footer__word" aria-hidden="true">STRATA</p>
+</footer>
+
+<script type="module" src="js/main.js"></script>
