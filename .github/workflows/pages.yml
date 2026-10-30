@@ -23,6 +23,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      # index.html omits the document skeleton because the claude.ai artifact adds its own;
+      # standalone hosting needs a doctype to render in standards mode.
+      - name: Add doctype for standalone hosting
+        run: |
+          { printf '<!doctype html>\n<html lang="en">\n'; cat strata-launch/index.html; } > index.tmp
+          mv index.tmp strata-launch/index.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: strata-launch
