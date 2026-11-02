@@ -1,5 +1,3 @@
-const MIN_STRETCH = 55;
-const MAX_STRETCH = 150;
 const FOOTER_CLEARANCE_PX = 60;
 const SPOT_STEP = 0.3; // percent of the viewport
 
@@ -10,10 +8,9 @@ export function backdropText(t, flavor) {
   return '14·11';
 }
 
-// Keeps the DOM (page colors, flavor list, backdrop word, chapter counter) in step with the scene.
+// Keeps the DOM (page colors, flavor list, chapter counter) in step with the scene.
 export function createUi(root) {
   const flavorItems = [...root.querySelectorAll('#flavor-list li')];
-  const word = root.querySelector('#backdrop-word');
   const chapterNames = [...root.querySelectorAll('[data-scene]')].map((el) => el.dataset.chapter);
   const chapterLinks = [...root.querySelectorAll('[data-chapter-link]')];
   const chapterNum = root.querySelector('#chapter-num');
@@ -22,7 +19,6 @@ export function createUi(root) {
   const progress = root.querySelector('.progress');
   const footer = root.querySelector('.footer');
   const style = root.documentElement.style;
-  let shownWord = word.textContent;
   let activeFlavor = -1;
   let activeChapter = -1;
 
@@ -32,15 +28,6 @@ export function createUi(root) {
     if (flavor.index === activeFlavor) return;
     activeFlavor = flavor.index;
     flavorItems.forEach((li, i) => li.classList.toggle('is-active', i === activeFlavor));
-  };
-
-  const setBackdrop = (text, stretch, opacity) => {
-    if (text !== shownWord) {
-      word.textContent = text;
-      shownWord = text;
-    }
-    word.style.fontStretch = `${MIN_STRETCH + (MAX_STRETCH - MIN_STRETCH) * stretch}%`;
-    word.style.opacity = opacity.toFixed(3);
   };
 
   const setChapter = (t) => {
@@ -70,5 +57,5 @@ export function createUi(root) {
     style.setProperty('--spot-y', `${next[1].toFixed(1)}%`);
   };
 
-  return { setFlavor, setBackdrop, setChapter, setSpot };
+  return { setFlavor, setChapter, setSpot };
 }
