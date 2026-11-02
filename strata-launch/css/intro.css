@@ -57,3 +57,17 @@ body::after {
   .loader__bars span, .loader__word { animation: none; transform: none; }
   [data-reveal], .display .line > span, .js-intro .loader { transition: none; }
 }
+
+/* ---------- Scroll motion (js/motion.js, js/strata-word.js) ---------- */
+/* Backdrop wordmark in four slices; the hidden sizer keeps the layout box */
+.backdrop__word { position: relative; }
+.backdrop__sizer { visibility: hidden; }
+.backdrop__slice { position: absolute; inset: 0; will-change: transform; }
+
+/* Room for descenders inside the line masks SplitText wraps around each line */
+[data-split] > * { padding-bottom: 0.16em; margin-bottom: -0.16em; }
+/* Hero lines and headline letters slide sideways; never let them widen the page */
+main { overflow-x: clip; }
+
+.has-motion .ticker__track { animation: none; will-change: transform; }
+.btn.is-magnetic { transition: background-color 160ms ease, color 160ms ease; }

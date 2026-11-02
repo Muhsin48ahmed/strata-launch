@@ -137,7 +137,7 @@
 .footer__word {
   margin: 0; padding-bottom: env(safe-area-inset-bottom, 0px);
   font-family: var(--f-display); font-weight: 900; font-stretch: 150%;
-  font-size: 18.5vw; line-height: 0.74; letter-spacing: -0.02em; text-align: center;
+  font-size: 13.5vw; line-height: 0.74; /* fits the content width once split into letters */ letter-spacing: -0.02em; text-align: center;
   color: var(--bg); transform: translateY(14%);
   white-space: nowrap;
 }
